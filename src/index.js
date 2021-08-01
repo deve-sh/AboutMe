@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/lib/integration/react"; // Redux-pers
 
 import * as serviceWorker from "./serviceWorker";
 
-import { store, persistor } from "./app/store";
+import { store, persistor } from "./App/store";
 import App from "./App";
 
 // Production requirements.

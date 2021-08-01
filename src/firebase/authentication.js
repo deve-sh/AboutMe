@@ -138,5 +138,3 @@ export const registerUserWithEmailAndPassword = async (values, callback) => {
         return callback(getAuthError(err), null);
     }
 };
-
-export default auth;

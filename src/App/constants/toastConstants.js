@@ -1,20 +1,28 @@
-import { notify } from "react-notify-toast";
+import { toast } from "react-toastify";
 
-const timeOut = 2000,
-	success = "success",
-	error = "error",
-	warning = "warning";
+let toastOptions = {
+	position: "bottom-left",
+	autoClose: 2000,
+	hideProgressBar: false,
+	closeOnClick: true,
+	pauseOnHover: false,
+	draggable: true,
+	progress: undefined,
+};
 
 const toasts = {
+	generateToast: (message) => {
+		return toast(message, toastOptions);
+	},
 	generateSuccess: (sucessMessage = "") => {
-		return notify.show(sucessMessage, success, timeOut);
+		return toast.success(sucessMessage, toastOptions);
 	},
 	generateError: (errorMessage = "") => {
-		return notify.show(errorMessage, error, timeOut);
+		return toast.error(errorMessage, toastOptions);
 	},
 	generateWarning: (warningMessage = "") => {
-		return notify.show(warningMessage, warning, timeOut);
-	}
+		return toast.warn(warningMessage, toastOptions);
+	},
 };
 
 export default toasts;

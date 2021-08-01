@@ -3,11 +3,13 @@
 import firebase from "./index";
 import mainFirebase from "firebase/app";
 import "firebase/auth";
+import secondaryApp from "./secondaryApp";
 
 const auth = firebase.auth();
 
 // Providers
 let googleProvider = new mainFirebase.auth.GoogleAuthProvider();
+let githubProvider = new mainFirebase.auth.GithubAuthProvider();
 
 export default auth;
 export const providers = { googleProvider, mainFirebase };

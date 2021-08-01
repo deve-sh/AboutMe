@@ -12,9 +12,9 @@ let googleProvider = new mainFirebase.auth.GoogleAuthProvider();
 export default auth;
 export const providers = { googleProvider, mainFirebase };
 
-const getToken = async (refreshToken = true) => {
+const getToken = async (refreshOldToken = true) => {
 	if (auth.currentUser) {
-		let token = await auth.currentUser.getIdToken(refreshToken);
+		let token = await auth.currentUser.getIdToken(refreshOldToken);
 		localStorage.setItem("usertoken", token);
 		return token;
 	} else return localStorage.getItem("usertoken") || "";

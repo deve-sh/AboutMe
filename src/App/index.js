@@ -7,22 +7,14 @@ import { ToastContainer } from "react-toastify";
 import constants from "./constants";
 import toasts from "./constants/toastConstants";
 
+import auth from "../firebase/authentication";
+
 const App = (props) => {
 	const dispatch = useDispatch();
 
-	// // Authentication handlers
-	// const [showAuth, setshowAuth] = useState(false);
-	// const [authMode, setauthMode] = useState(constants.LOGINMODE);
-
-	// const toggleAuth = newAuthMode => {
-	// 	if (newAuthMode) setauthMode(newAuthMode);
-	// 	setshowAuth(!showAuth);
-	// };
-
-	// const switchMode = newAuthMode => setauthMode(newAuthMode);
-
-	// const isAuthenticated = useSelector(state => state.isAuthenticated);
-	// const hasFetchedUser = useSelector(state => state.hasFetchedUser);
+	useEffect(() => {
+		auth.onAuthStateChanged(console.log);
+	}, []);
 
 	// Actual app.
 	return (

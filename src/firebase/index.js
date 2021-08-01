@@ -2,7 +2,7 @@
 	The main firebase configuration file.
 */
 
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import "firebase/performance";
 
 const config = {

@@ -1,6 +1,7 @@
 const appConstants = {
-	APPNAME: "Issuer",
-	AUTHTOKEN: "usertoken"
+	COLLECTIONS: {
+		REGISTEREDUSERS: "registeredusers",
+	},
 };
 
 export default appConstants;

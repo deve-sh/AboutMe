@@ -13,6 +13,9 @@ import toasts from "./constants/toastConstants";
 
 import auth from "../firebase/authentication";
 
+// Pages
+import Login from "./pages/Login";
+
 const theme = createTheme({
 	palette: {
 		primary: teal,
@@ -33,7 +36,9 @@ const App = (props) => {
 			{/* Global Toast for error messages */}
 			<ToastContainer />
 
-			<Switch></Switch>
+			<Switch>
+				<Route path="/login" component={Login} />
+			</Switch>
 		</ThemeProvider>
 	);
 };

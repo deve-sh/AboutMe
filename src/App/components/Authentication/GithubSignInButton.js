@@ -10,6 +10,10 @@ const StyledButton = styled(Button)`
 	color: #ffffff !important;
 	cursor: pointer;
 	border: 0.075rem solid #191919;
+
+	&:disabled {
+		background: #414141 !important;
+	}
 `;
 
 const StyledButtonLabel = styled.label`
@@ -22,7 +26,11 @@ const StyledButtonLabel = styled.label`
 
 const GithubSignInButton = (props) => {
 	return (
-		<StyledButton variant={"contained"} disabled={props.disabled}>
+		<StyledButton
+			variant={"contained"}
+			onClick={props.onClick}
+			disabled={props.disabled}
+		>
 			<GitHubIcon />
 			<StyledButtonLabel>Sign In With Github</StyledButtonLabel>
 		</StyledButton>

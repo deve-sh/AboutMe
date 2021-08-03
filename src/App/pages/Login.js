@@ -7,6 +7,11 @@ import GithubSignInButton from "../components/Authentication/GithubSignInButton"
 import GoogleSignInButton from "../components/Authentication/GoogleSignInButton";
 import Image from "../components/Image";
 
+import {
+	signInWithGithub,
+	signInWithGoogle,
+} from "../../firebase/authentication";
+
 const LoginPageForm = styled(Paper)`
 	padding: 3rem 1rem;
 	display: block;
@@ -41,19 +46,29 @@ const LoginFormImage = styled(Image)`
 const Login = (props) => {
 	const [loading, setloading] = useState(false);
 
-	const signInWithGoogle = () => {};
+	const onGoogleSignInClick = () => {
+		setloading(true);
+		signInWithGoogle(() => {
+			setloading(false);
+		});
+	};
 
-	const signInWithGithub = () => {};
+	const onGithubSignInClick = () => {
+		setloading(true);
+		signInWithGithub(() => {
+			setloading(false);
+		});
+	};
 
 	return (
 		<LoginPage>
 			<LoginPageForm elevation={6}>
 				<LoginFormHeading variant={"h4"}>Login</LoginFormHeading>
 				<LoginFormImage src={"/login.svg"} />
-				<GoogleSignInButton disabled={loading} />
+				<GoogleSignInButton disabled={loading} onClick={onGoogleSignInClick} />
 				<br />
 				<br />
-				<GithubSignInButton disabled={loading} />
+				<GithubSignInButton disabled={loading} onClick={onGithubSignInClick} />
 			</LoginPageForm>
 		</LoginPage>
 	);

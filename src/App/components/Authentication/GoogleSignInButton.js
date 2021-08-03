@@ -10,6 +10,10 @@ const StyledButton = styled(Button)`
 	background: #ffffff !important;
 	border: 0.075rem solid #cfcfcf !important;
 	cursor: pointer;
+
+	&:disabled {
+		background: #efefef !important;
+	}
 `;
 
 const StyledLogoImage = styled(Image)`
@@ -27,7 +31,11 @@ const StyledButtonLabel = styled.label`
 
 const GoogleSignInButton = (props) => {
 	return (
-		<StyledButton variant={"contained"} disabled={props.disabled}>
+		<StyledButton
+			variant={"contained"}
+			onClick={props.onClick}
+			disabled={props.disabled}
+		>
 			<StyledLogoImage src="/logos/google.png" />
 			<StyledButtonLabel>Sign In With Google</StyledButtonLabel>
 		</StyledButton>

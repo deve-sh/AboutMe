@@ -7,7 +7,7 @@ import Image from "../Image";
 const StyledButton = styled(Button)`
 	padding: 0.875rem 1rem !important;
 	border-radius: 0.25rem;
-	background: #ffffff;
+	background: #ffffff !important;
 	border: 0.075rem solid #f1f1f1;
 `;
 

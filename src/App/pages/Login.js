@@ -11,6 +11,7 @@ import {
 	signInWithGithub,
 	signInWithGoogle,
 } from "../../firebase/authentication";
+import toasts from "../constants/toastConstants";
 
 const LoginPageForm = styled(Paper)`
 	padding: 3rem 1rem;
@@ -46,18 +47,19 @@ const LoginFormImage = styled(Image)`
 const Login = (props) => {
 	const [loading, setloading] = useState(false);
 
+	const handleAuthenticated = (err) => {
+		setloading(false);
+		if (err) toasts.generateError(err);
+	};
+
 	const onGoogleSignInClick = () => {
 		setloading(true);
-		signInWithGoogle(() => {
-			setloading(false);
-		});
+		signInWithGoogle(handleAuthenticated);
 	};
 
 	const onGithubSignInClick = () => {
 		setloading(true);
-		signInWithGithub(() => {
-			setloading(false);
-		});
+		signInWithGithub(handleAuthenticated);
 	};
 
 	return (

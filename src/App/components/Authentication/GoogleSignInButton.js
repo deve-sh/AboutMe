@@ -25,7 +25,7 @@ const StyledButtonLabel = styled.label`
 
 const GoogleSignInButton = (props) => {
 	return (
-		<StyledButton variant={"contained"}>
+		<StyledButton variant={"contained"} disabled={props.disabled}>
 			<StyledLogoImage src="/logos/google.png" />
 			<StyledButtonLabel>Sign In With Google</StyledButtonLabel>
 		</StyledButton>

@@ -20,7 +20,7 @@ const StyledButtonLabel = styled.label`
 
 const GithubSignInButton = (props) => {
 	return (
-		<StyledButton variant={"contained"}>
+		<StyledButton variant={"contained"} disabled={props.disabled}>
 			<GitHubIcon />
 			<StyledButtonLabel>Sign In With Github</StyledButtonLabel>
 		</StyledButton>

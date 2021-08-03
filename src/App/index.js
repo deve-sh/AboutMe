@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Global material ui configuration.
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";

@@ -12,6 +12,8 @@ import App from "./App";
 // Production requirements.
 import { disableReactDevTools } from "./prod";
 
+import "./styles/globals.css";
+
 // Remove react dev tools for production build to avoid state manipulation by user
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 

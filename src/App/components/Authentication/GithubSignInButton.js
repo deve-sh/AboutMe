@@ -7,7 +7,8 @@ const StyledButton = styled(Button)`
 	padding: 0.875rem 1rem !important;
 	border-radius: 0.25rem;
 	background: #191919 !important;
-    color: #ffffff !important;
+	color: #ffffff !important;
+	cursor: pointer;
 	border: 0.075rem solid #191919;
 `;
 
@@ -16,6 +17,7 @@ const StyledButtonLabel = styled.label`
 	font-weight: 500;
 	font-size: 0.875rem;
 	letter-spacing: 0.075rem;
+	cursor: pointer;
 `;
 
 const GithubSignInButton = (props) => {

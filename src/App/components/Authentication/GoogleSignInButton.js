@@ -8,7 +8,8 @@ const StyledButton = styled(Button)`
 	padding: 0.875rem 1rem !important;
 	border-radius: 0.25rem;
 	background: #ffffff !important;
-	border: 0.075rem solid #f1f1f1;
+	border: 0.075rem solid #cfcfcf !important;
+	cursor: pointer;
 `;
 
 const StyledLogoImage = styled(Image)`
@@ -21,6 +22,7 @@ const StyledButtonLabel = styled.label`
 	font-weight: 500;
 	font-size: 0.875rem;
 	letter-spacing: 0.075rem;
+	cursor: pointer;
 `;
 
 const GoogleSignInButton = (props) => {

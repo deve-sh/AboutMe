@@ -23,7 +23,7 @@ export const createUserDocument = async (
 ) => {
 	try {
 		userData = userData || {
-			email: userIdentifier,
+			identifier: userIdentifier,
 			statusOptions: {},
 			status: "No Status",
 			statusEmoji: "😁",
@@ -38,6 +38,22 @@ export const createUserDocument = async (
 		await userRef.set(userData);
 
 		return callback(null, userData);
+	} catch (err) {
+		if (process.env.REACT_APP_USE_ENV !== "production") console.log(err);
+		return callback(err.message, null);
+	}
+};
+
+export const updateUserDocument = async (userIdentifier, updates, callback) => {
+	try {
+		let userRef = db
+			.collection(appConstants.COLLECTIONS.REGISTEREDUSERS)
+			.doc(userIdentifier);
+
+		await userRef.update({
+			...updates,
+			updatedAt: firestore.FieldValue.serverTimestamp(),
+		});
 	} catch (err) {
 		if (process.env.REACT_APP_USE_ENV !== "production") console.log(err);
 		return callback(err.message, null);
@@ -59,7 +75,7 @@ export default updateStatus = async (statusUpdates, callback) => {
 		await userRef.update({
 			...statusUpdates,
 			updatedAt: firestore.FieldValue.serverTimestamp(),
-			nUpdates: firestore.FieldValue.increment(1),
+			nStatusUpdates: firestore.FieldValue.increment(1),
 		});
 
 		return callback(null, statusUpdates);

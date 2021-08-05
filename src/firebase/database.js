@@ -2,7 +2,7 @@
 
 // Complementary firestore file.
 
-import * as mainFirebase from 'firebase/app';
+import mainFirebase from 'firebase/app';
 import firebase from './index';
 import 'firebase/firestore';
 

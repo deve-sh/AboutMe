@@ -60,7 +60,7 @@ export const updateUserDocument = async (userIdentifier, updates, callback) => {
 	}
 };
 
-export default updateStatus = async (statusUpdates, callback) => {
+export const updateStatus = async (userIdentifier, statusUpdates, callback) => {
 	try {
 		statusUpdates = statusUpdates || {
 			statusOptions: {},

@@ -12,6 +12,7 @@ import {
 	signInWithGoogle,
 } from "../../firebase/authentication";
 import toasts from "../constants/toastConstants";
+import { useHistory } from "react-router-dom";
 
 const LoginPageForm = styled(Paper)`
 	padding: 3rem 1rem;
@@ -44,12 +45,14 @@ const LoginFormImage = styled(Image)`
 	max-width: 90%;
 `;
 
-const Login = (props) => {
+const Login = () => {
+	const history = useHistory();
 	const [loading, setloading] = useState(false);
 
 	const handleAuthenticated = (err) => {
 		setloading(false);
 		if (err) toasts.generateError(err);
+		else history.push("/profile");
 	};
 
 	const onGoogleSignInClick = () => {

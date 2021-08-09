@@ -15,6 +15,7 @@ import {
 import styled from "styled-components";
 
 import Image from "../components/Image";
+import { updateStatus } from "../API";
 
 const ProfileContainer = styled.div`
 	text-align: center;
@@ -54,6 +55,15 @@ const Profile = (props) => {
 		state.user?.statusEmoji || "😁"
 	);
 
+	const updateProfileStatus = (event) => {
+		event.preventDefault();
+		updateStatus(state.user.email || state.user.phoneNumber, {
+			status: userStatus,
+			statusEmoji: userStatusEmoji,
+			statusOptions: {},
+		});
+	};
+
 	return (
 		<ProfileContainer>
 			<ProfilePictureContainer>
@@ -75,6 +85,7 @@ const Profile = (props) => {
 					setuserStatus(e.target.value);
 				}}
 				fullWidth={true}
+				value={userStatus}
 				InputProps={{
 					startAdornment: (
 						<InputAdornment position="start">
@@ -97,6 +108,7 @@ const Profile = (props) => {
 					e.persist();
 					setuserStatusEmoji(e.target.value);
 				}}
+				value={userStatusEmoji}
 				fullWidth={true}
 				InputProps={{
 					startAdornment: (
@@ -108,7 +120,12 @@ const Profile = (props) => {
 			/>
 			<br />
 			<br />
-			<Button variant={"contained"} color="primary" endIcon={<Send />}>
+			<Button
+				onClick={updateProfileStatus}
+				variant={"contained"}
+				color="primary"
+				endIcon={<Send />}
+			>
 				Update
 			</Button>
 		</ProfileContainer>

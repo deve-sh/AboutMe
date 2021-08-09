@@ -15,11 +15,16 @@ import toasts from "./constants/toastConstants";
 
 import auth from "../firebase/authentication";
 
+// Reusable Components
+import ProtectedRoute from "./components/ProtectedRoute";
+
 // Pages
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 // Store actions
 import {
+	loginUser,
 	logoutUser as logoutUserFromStore,
 	updateUserDetails,
 } from "./store/actionCreators";
@@ -37,6 +42,7 @@ const App = () => {
 
 	useEffect(() => {
 		auth.onAuthStateChanged(async (user) => {
+			console.log(user);
 			if (user) {
 				let displayName = user.displayName,
 					email = user.email,
@@ -73,6 +79,8 @@ const App = () => {
 					// Create a user with this identifier.
 					await createUserDocument(email || phoneNumber, userData);
 				}
+
+				dispatch(loginUser(userData));
 			} else dispatch(logoutUserFromStore());
 		});
 	}, []);
@@ -85,6 +93,7 @@ const App = () => {
 
 			<Switch>
 				<Route path="/login" component={Login} />
+				<ProtectedRoute path="/profile" component={Profile} />
 			</Switch>
 		</ThemeProvider>
 	);

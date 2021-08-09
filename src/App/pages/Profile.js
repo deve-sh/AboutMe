@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -75,6 +75,11 @@ const Profile = (props) => {
 			}
 		);
 	};
+
+	useEffect(() => {
+		setuserStatus(state.user?.status || "");
+		setuserStatusEmoji(state.user?.statusEmoji || "😁");
+	}, [state.user?.status, state.user?.statusEmoji]);
 
 	return (
 		<ProfileContainer>

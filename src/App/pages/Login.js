@@ -12,7 +12,8 @@ import {
 	signInWithGoogle,
 } from "../../firebase/authentication";
 import toasts from "../constants/toastConstants";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LoginPageForm = styled(Paper)`
 	padding: 3rem 1rem;
@@ -46,6 +47,9 @@ const LoginFormImage = styled(Image)`
 `;
 
 const Login = () => {
+	const { user, isAuthenticated } = useSelector(
+		({ user, isAuthenticated }) => ({ user, isAuthenticated })
+	);
 	const history = useHistory();
 	const [loading, setloading] = useState(false);
 
@@ -65,7 +69,9 @@ const Login = () => {
 		signInWithGithub(handleAuthenticated);
 	};
 
-	return (
+	return user || isAuthenticated ? (
+		<Redirect to={"/profile"} />
+	) : (
 		<LoginPage>
 			<LoginPageForm elevation={6}>
 				<LoginFormHeading variant={"h4"}>Login</LoginFormHeading>

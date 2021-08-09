@@ -43,7 +43,6 @@ const App = () => {
 
 	useEffect(() => {
 		auth.onAuthStateChanged(async (user) => {
-			console.log(user);
 			if (user) {
 				let displayName = user.displayName,
 					email = user.email,
@@ -81,7 +80,7 @@ const App = () => {
 					await createUserDocument(email || phoneNumber, userData);
 				}
 
-				dispatch(loginUser(userData));
+				dispatch(loginUser({ ...userData, ...(userDocumentInDatabase || {}) }));
 			} else dispatch(logoutUserFromStore());
 		});
 	}, []);

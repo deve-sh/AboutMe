@@ -15,7 +15,9 @@ import {
 import styled from "styled-components";
 
 import Image from "../components/Image";
+
 import { updateStatus } from "../API";
+import toasts from "../constants/toastConstants";
 
 const ProfileContainer = styled.div`
 	text-align: center;
@@ -50,6 +52,7 @@ const ProfileNameHeading = styled(Typography)`
 const Profile = (props) => {
 	let state = useSelector((state) => state);
 
+	const [loading, setloading] = useState(false);
 	const [userStatus, setuserStatus] = useState(state.user?.status || "");
 	const [userStatusEmoji, setuserStatusEmoji] = useState(
 		state.user?.statusEmoji || "😁"
@@ -57,11 +60,20 @@ const Profile = (props) => {
 
 	const updateProfileStatus = (event) => {
 		event.preventDefault();
-		updateStatus(state.user.email || state.user.phoneNumber, {
-			status: userStatus,
-			statusEmoji: userStatusEmoji,
-			statusOptions: {},
-		});
+		setloading(true);
+		updateStatus(
+			state.user.email || state.user.phoneNumber,
+			{
+				status: userStatus,
+				statusEmoji: userStatusEmoji,
+				statusOptions: {},
+			},
+			(err) => {
+				setloading(false);
+				if (err) return toasts.generateError(err);
+				return toasts.generateSuccess("Updated Status");
+			}
+		);
 	};
 
 	return (
@@ -86,6 +98,7 @@ const Profile = (props) => {
 				}}
 				fullWidth={true}
 				value={userStatus}
+				disabled={loading}
 				InputProps={{
 					startAdornment: (
 						<InputAdornment position="start">
@@ -104,6 +117,7 @@ const Profile = (props) => {
 				variant="outlined"
 				color="secondary"
 				placeholder="Ex: 😁"
+				disabled={loading}
 				onChange={(e) => {
 					e.persist();
 					setuserStatusEmoji(e.target.value);
@@ -125,6 +139,7 @@ const Profile = (props) => {
 				variant={"contained"}
 				color="primary"
 				endIcon={<Send />}
+				disabled={loading}
 			>
 				Update
 			</Button>

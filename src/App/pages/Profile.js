@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
 	Button,
@@ -17,6 +17,7 @@ import Image from "../components/Image";
 
 import { updateStatus } from "../API";
 import toasts from "../constants/toastConstants";
+import { updateUserDetails } from "../store/actionCreators";
 
 const ProfileContainer = styled.div`
 	text-align: center;
@@ -63,8 +64,9 @@ const Row = styled.div`
 	margin-bottom: 1rem;
 `;
 
-const Profile = (props) => {
-	let state = useSelector((state) => state);
+const Profile = () => {
+	const dispatch = useDispatch();
+	const state = useSelector((state) => state);
 
 	const [loading, setloading] = useState(false);
 	const [userStatus, setuserStatus] = useState(state.user?.status || "");
@@ -78,21 +80,19 @@ const Profile = (props) => {
 	const updateProfileStatus = (event) => {
 		event.preventDefault();
 		setloading(true);
-		updateStatus(
-			state.user.email || state.user.phoneNumber,
-			{
-				status: userStatus,
-				statusEmoji: userStatusEmoji,
-				statusOptions: {
-					color: userStatusColor,
-				},
+		let updates = {
+			status: userStatus,
+			statusEmoji: userStatusEmoji,
+			statusOptions: {
+				color: userStatusColor,
 			},
-			(err) => {
-				setloading(false);
-				if (err) return toasts.generateError(err);
-				return toasts.generateSuccess("Updated Status");
-			}
-		);
+		};
+		updateStatus(state.user.email || state.user.phoneNumber, updates, (err) => {
+			setloading(false);
+			if (err) return toasts.generateError(err);
+			dispatch(updateUserDetails(updates));
+			return toasts.generateSuccess("Updated Status");
+		});
 	};
 
 	useEffect(() => {

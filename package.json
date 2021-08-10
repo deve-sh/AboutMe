@@ -9,6 +9,7 @@
     "browser-image-compression": "^1.0.14",
     "firebase": "^8.8.1",
     "react": "^17.0.2",
+    "react-color": "^2.19.3",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",

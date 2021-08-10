@@ -14,6 +14,7 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 
+import { ChromePicker } from "react-color";
 import Image from "../components/Image";
 
 import { updateStatus } from "../API";
@@ -49,6 +50,13 @@ const ProfileNameHeading = styled(Typography)`
 	margin-bottom: 1.5rem !important;
 `;
 
+const ColorPickerContainer = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	flex-flow: column;
+`;
+
 const Profile = (props) => {
 	let state = useSelector((state) => state);
 
@@ -56,6 +64,9 @@ const Profile = (props) => {
 	const [userStatus, setuserStatus] = useState(state.user?.status || "");
 	const [userStatusEmoji, setuserStatusEmoji] = useState(
 		state.user?.statusEmoji || "😁"
+	);
+	const [userStatusColor, setuserStatusColor] = useState(
+		state.user?.statusOptions?.color || "#66ff00"
 	);
 
 	const updateProfileStatus = (event) => {
@@ -137,6 +148,16 @@ const Profile = (props) => {
 					),
 				}}
 			/>
+			<br />
+			<br />
+			{console.log(userStatusColor)}
+			<ColorPickerContainer>
+				<Typography color="textSecondary">Status Badge Colour</Typography>
+				<ChromePicker
+					color={userStatusColor}
+					onChangeComplete={(color) => setuserStatusColor(color.hex)}
+				/>
+			</ColorPickerContainer>
 			<br />
 			<br />
 			<Button

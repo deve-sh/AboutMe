@@ -77,7 +77,9 @@ const Profile = (props) => {
 			{
 				status: userStatus,
 				statusEmoji: userStatusEmoji,
-				statusOptions: {},
+				statusOptions: {
+					color: userStatusColor,
+				},
 			},
 			(err) => {
 				setloading(false);

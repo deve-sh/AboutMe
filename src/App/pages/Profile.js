@@ -7,11 +7,7 @@ import {
 	TextField,
 	Typography,
 } from "@material-ui/core";
-import {
-	AccountCircle,
-	Send,
-	SentimentVerySatisfied,
-} from "@material-ui/icons";
+import { AccountCircle, Send } from "@material-ui/icons";
 import styled from "styled-components";
 
 import { ChromePicker } from "react-color";
@@ -57,6 +53,12 @@ const CenterAlignContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-flow: column;
+`;
+
+const Row = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: center;
 `;
 
 const Profile = (props) => {
@@ -132,13 +134,16 @@ const Profile = (props) => {
 			<br />
 			<br />
 			<CenterAlignContainer>
-				<Typography
-					gutterBottom
-					color="textSecondary"
-					style={{ fontWeight: 600 }}
-				>
-					Selected Emoji: {userStatusEmoji}
-				</Typography>
+				<Row>
+					<Typography
+						gutterBottom
+						color="textSecondary"
+						style={{ fontWeight: 600 }}
+					>
+						Selected Emoji:
+					</Typography>
+					{userStatusEmoji}
+				</Row>
 				<EmojiPicker
 					onEmojiClick={(_, emojiObject) => {
 						console.log(emojiObject);

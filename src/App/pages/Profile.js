@@ -109,28 +109,31 @@ const Profile = (props) => {
 			<ProfileNameHeading variant="h5">
 				{state.user?.displayName || "Anonymous User"}
 			</ProfileNameHeading>
-			<TextField
-				id="status-textfield"
-				label="Status"
-				variant="outlined"
-				placeholder="Ex: Out For Lunch"
-				onChange={(e) => {
-					e.persist();
-					setuserStatus(e.target.value);
-				}}
-				fullWidth={true}
-				value={userStatus}
-				disabled={loading}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<AccountCircle color="primary" />
-						</InputAdornment>
-					),
-					maxLength: 20,
-					minLength: 0,
-				}}
-			/>
+			<Row>
+				<TextField
+					id="status-textfield"
+					label="Status"
+					variant="outlined"
+					placeholder="Ex: Out For Lunch"
+					onChange={(e) => {
+						e.persist();
+						if (e.target?.value?.length > 20) return;
+						setuserStatus(e.target.value);
+					}}
+					value={userStatus}
+					disabled={loading}
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="start">
+								<AccountCircle />
+							</InputAdornment>
+						),
+					}}
+				/>
+				<Typography color="textSecondary" style={{ marginLeft: "1rem" }}>
+					{userStatus.length} / 20
+				</Typography>
+			</Row>
 			<br />
 			<br />
 			<CenterAlignContainer>

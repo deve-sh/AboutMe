@@ -26,6 +26,10 @@ module.exports = async (req, res) => {
 			isStatusPresent: !!userInfo.status || false,
 			status: userInfo.status || "No Status",
 			statusEmoji: userInfo.statusEmoji || "😁",
+			statusColor:
+				userInfo.statusOptions && userInfo.statusOptions.color
+					? userInfo.statusOptions.color
+					: "brightgreen",
 		});
 	} catch (err) {
 		return res.status(500).json({

@@ -15,6 +15,8 @@ import {
 import styled from "styled-components";
 
 import { ChromePicker } from "react-color";
+import EmojiPicker from "emoji-picker-react";
+
 import Image from "../components/Image";
 
 import { updateStatus } from "../API";
@@ -50,7 +52,7 @@ const ProfileNameHeading = styled(Typography)`
 	margin-bottom: 1.5rem !important;
 `;
 
-const ColorPickerContainer = styled.div`
+const CenterAlignContainer = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: center;
@@ -129,37 +131,33 @@ const Profile = (props) => {
 			/>
 			<br />
 			<br />
-			<TextField
-				id="status-textfield"
-				label="Status Emoji"
-				variant="outlined"
-				color="secondary"
-				placeholder="Ex: 😁"
-				disabled={loading}
-				onChange={(e) => {
-					e.persist();
-					setuserStatusEmoji(e.target.value);
-				}}
-				value={userStatusEmoji}
-				fullWidth={true}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<SentimentVerySatisfied color="secondary" />
-						</InputAdornment>
-					),
-				}}
-			/>
+			<CenterAlignContainer>
+				<Typography
+					gutterBottom
+					color="textSecondary"
+					style={{ fontWeight: 600 }}
+				>
+					Selected Emoji: {userStatusEmoji}
+				</Typography>
+				<EmojiPicker
+					onEmojiClick={(_, emojiObject) => {
+						console.log(emojiObject);
+						setuserStatusEmoji(emojiObject.emoji);
+					}}
+					disableAutoFocus={true}
+					groupNames={{ smileys_people: "PEOPLE" }}
+					native
+				/>
+			</CenterAlignContainer>
 			<br />
 			<br />
-			{console.log(userStatusColor)}
-			<ColorPickerContainer>
+			<CenterAlignContainer>
 				<Typography color="textSecondary">Status Badge Colour</Typography>
 				<ChromePicker
 					color={userStatusColor}
 					onChangeComplete={(color) => setuserStatusColor(color.hex)}
 				/>
-			</ColorPickerContainer>
+			</CenterAlignContainer>
 			<br />
 			<br />
 			<Button

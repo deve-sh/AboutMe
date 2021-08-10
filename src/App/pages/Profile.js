@@ -53,12 +53,14 @@ const CenterAlignContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-flow: column;
+	padding: 1rem;
 `;
 
 const Row = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: center;
+	margin-bottom: 1rem;
 `;
 
 const Profile = (props) => {
@@ -134,40 +136,36 @@ const Profile = (props) => {
 					{userStatus.length} / 20
 				</Typography>
 			</Row>
-			<br />
-			<br />
-			<CenterAlignContainer>
-				<Row>
-					<Typography
-						gutterBottom
-						color="textSecondary"
-						style={{ fontWeight: 600 }}
-					>
-						Selected Emoji:
-					</Typography>
-					{userStatusEmoji}
-				</Row>
-				<EmojiPicker
-					onEmojiClick={(_, emojiObject) => {
-						console.log(emojiObject);
-						setuserStatusEmoji(emojiObject.emoji);
-					}}
-					disableAutoFocus={true}
-					groupNames={{ smileys_people: "PEOPLE" }}
-					native
-				/>
-			</CenterAlignContainer>
-			<br />
-			<br />
-			<CenterAlignContainer>
-				<Typography color="textSecondary">Status Badge Colour</Typography>
-				<ChromePicker
-					color={userStatusColor}
-					onChangeComplete={(color) => setuserStatusColor(color.hex)}
-				/>
-			</CenterAlignContainer>
-			<br />
-			<br />
+			<Row>
+				<CenterAlignContainer>
+					<Row>
+						<Typography
+							gutterBottom
+							color="textSecondary"
+							style={{ fontWeight: 600 }}
+						>
+							Selected Emoji:
+						</Typography>
+						{userStatusEmoji}
+					</Row>
+					<EmojiPicker
+						onEmojiClick={(_, emojiObject) => {
+							console.log(emojiObject);
+							setuserStatusEmoji(emojiObject.emoji);
+						}}
+						disableAutoFocus={true}
+						groupNames={{ smileys_people: "PEOPLE" }}
+						native
+					/>
+				</CenterAlignContainer>
+				<CenterAlignContainer>
+					<Typography color="textSecondary">Status Badge Colour</Typography>
+					<ChromePicker
+						color={userStatusColor}
+						onChangeComplete={(color) => setuserStatusColor(color.hex)}
+					/>
+				</CenterAlignContainer>
+			</Row>
 			<Button
 				onClick={updateProfileStatus}
 				variant={"contained"}

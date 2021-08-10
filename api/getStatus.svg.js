@@ -1,7 +1,7 @@
 module.exports = async (req, res) => {
 	try {
 		const firebase = require("../serverSideFirebase");
-        const { get } = require('axios');
+		const { get } = require("axios");
 
 		const generateStatusBadge = async (status, emoji, options) => {
 			status = status || "No Status";
@@ -11,12 +11,14 @@ module.exports = async (req, res) => {
 			try {
 				let shieldsURL = `https://img.shields.io/badge/${encodeURIComponent(
 					emoji
-				)}-${encodeURIComponent(status)}-${options.color || "brightgreen"}`;
+				)}-${encodeURIComponent(status)}-${
+					options.color ? options.color.replace(/#/g, "") : "brightgreen"
+				}`;
 				let svgHTML = await get(shieldsURL);
 
 				return svgHTML.data;
 			} catch (err) {
-				console.log("Error in generating status badge: ", err);
+				console.log("Error in generating status badge: ", err.response.data);
 				return "";
 			}
 		};

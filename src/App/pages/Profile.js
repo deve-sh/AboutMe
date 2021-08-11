@@ -7,8 +7,11 @@ import {
 	TextField,
 	Typography,
 	Card,
+	CardActions,
+	Tooltip,
+	IconButton,
 } from "@material-ui/core";
-import { AccountCircle, Send } from "@material-ui/icons";
+import { AccountCircle, Launch, Send } from "@material-ui/icons";
 import styled from "styled-components";
 
 import { ChromePicker } from "react-color";
@@ -79,6 +82,11 @@ const CodeBlock = styled(Card)`
 	max-width: 400px;
 	border-radius: 0.5rem;
 	text-align: left;
+`;
+
+const CodeBlockAction = styled(CardActions)`
+	padding: 0 !important;
+	margin-top: 0.75rem;
 `;
 
 const Profile = () => {
@@ -198,6 +206,25 @@ const Profile = () => {
 					null,
 					4
 				)}
+				<CodeBlockAction>
+					<Tooltip title="Get Link To Status">
+						<a
+							href={`/api/getStatus.json?identifier=${
+								state.user.email || state.user.phoneNumber
+							}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<IconButton
+								disableSpacing
+								size="small"
+								style={{ color: "#ffffff", padding: 0 }}
+							>
+								<Launch size="small" />
+							</IconButton>
+						</a>
+					</Tooltip>
+				</CodeBlockAction>
 			</CodeBlock>
 			<Button
 				onClick={updateProfileStatus}

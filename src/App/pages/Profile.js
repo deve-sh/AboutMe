@@ -6,6 +6,7 @@ import {
 	InputAdornment,
 	TextField,
 	Typography,
+	Card,
 } from "@material-ui/core";
 import { AccountCircle, Send } from "@material-ui/icons";
 import styled from "styled-components";
@@ -68,6 +69,16 @@ const Row = styled.div`
 			flex-direction: column;
 		}
 	}
+`;
+
+const CodeBlock = styled(Card)`
+	font-family: monospace;
+	white-space: pre-wrap;
+	padding: 1rem;
+	margin: 1rem auto;
+	max-width: 400px;
+	border-radius: 0.5rem;
+	text-align: left;
 `;
 
 const Profile = () => {
@@ -172,6 +183,22 @@ const Profile = () => {
 					/>
 				</CenterAlignContainer>
 			</Row>
+			<CodeBlock
+				style={{ background: "#212121", color: "#ffffff" }}
+				elevation={10}
+			>
+				{JSON.stringify(
+					{
+						identifier: state.user.email || state.user.phoneNumber,
+						isStatusPresent: !!userStatus || false,
+						status: userStatus || "No Status",
+						statusEmoji: userStatusEmoji || "😁",
+						statusColor: userStatusColor || "brightgreen",
+					},
+					null,
+					4
+				)}
+			</CodeBlock>
 			<Button
 				onClick={updateProfileStatus}
 				variant={"contained"}

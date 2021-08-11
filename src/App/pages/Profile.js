@@ -11,7 +11,12 @@ import {
 	Tooltip,
 	IconButton,
 } from "@material-ui/core";
-import { AccountCircle, Launch, Send } from "@material-ui/icons";
+import {
+	AccountCircle,
+	Launch,
+	Send,
+	Image as ImageIcon,
+} from "@material-ui/icons";
 import styled from "styled-components";
 
 import { ChromePicker } from "react-color";
@@ -221,6 +226,23 @@ const Profile = () => {
 								style={{ color: "#ffffff", padding: 0 }}
 							>
 								<Launch size="small" />
+							</IconButton>
+						</a>
+					</Tooltip>
+					<Tooltip title="Get Status Image">
+						<a
+							href={`/api/getStatus.svg?identifier=${
+								state.user.email || state.user.phoneNumber
+							}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<IconButton
+								disableSpacing
+								size="small"
+								style={{ color: "#ffffff", padding: 0 }}
+							>
+								<ImageIcon size="small" />
 							</IconButton>
 						</a>
 					</Tooltip>

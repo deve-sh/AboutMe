@@ -62,6 +62,12 @@ const Row = styled.div`
 	display: flex;
 	justify-content: center;
 	margin-bottom: 1rem;
+
+	&.splitonsmallscreen {
+		@media (max-width: 576px) {
+			flex-direction: column;
+		}
+	}
 `;
 
 const Profile = () => {
@@ -136,7 +142,7 @@ const Profile = () => {
 					{userStatus.length} / 20
 				</Typography>
 			</Row>
-			<Row>
+			<Row className="splitonsmallscreen">
 				<CenterAlignContainer>
 					<Row>
 						<Typography

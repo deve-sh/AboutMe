@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Redirect, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 import { Paper, Typography } from "@material-ui/core";
 
@@ -12,8 +15,6 @@ import {
 	signInWithGoogle,
 } from "../../firebase/authentication";
 import toasts from "../constants/toastConstants";
-import { Redirect, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const LoginPageForm = styled(Paper)`
 	padding: 3rem 1rem;
@@ -73,6 +74,9 @@ const Login = () => {
 		<Redirect to={"/profile"} />
 	) : (
 		<LoginPage>
+			<Helmet>
+				<title>AboutMe - Login</title>
+			</Helmet>
 			<LoginPageForm elevation={6}>
 				<LoginFormHeading variant={"h4"}>Login</LoginFormHeading>
 				<LoginFormImage src={"/login.svg"} />

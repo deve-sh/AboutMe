@@ -17,6 +17,7 @@ import {
 	Launch,
 	Send,
 	Image as ImageIcon,
+	ExitToApp as LogoutIcon,
 } from "@material-ui/icons";
 import styled from "styled-components";
 
@@ -108,7 +109,7 @@ let StatusImage = styled(Image)`
 `;
 StatusImage = React.memo(StatusImage);
 
-const Profile = () => {
+const Profile = (props) => {
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state);
 
@@ -280,6 +281,16 @@ const Profile = () => {
 					disabled={loading}
 				>
 					Update
+				</Button>
+				&nbsp;
+				<Button
+					onClick={props.logoutUser}
+					color="secondary"
+					style={{ marginLeft: "1rem" }}
+					endIcon={<LogoutIcon />}
+					disabled={loading}
+				>
+					Logout
 				</Button>
 			</ProfileContainer>
 		</>

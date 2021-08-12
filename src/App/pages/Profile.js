@@ -94,6 +94,10 @@ const CodeBlockAction = styled(CardActions)`
 	margin-top: 0.75rem;
 `;
 
+const StatusImage = React.memo(styled(Image)`
+	margin-bottom: 1rem;
+`);
+
 const Profile = () => {
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state);
@@ -141,6 +145,11 @@ const Profile = () => {
 			<ProfileNameHeading variant="h5">
 				{state.user?.displayName || "Anonymous User"}
 			</ProfileNameHeading>
+			<StatusImage
+				src={`/api/getStatus.svg?identifier=${
+					state.user?.email || state.user?.phoneNumber
+				}`}
+			/>
 			<Row>
 				<TextField
 					id="status-textfield"
@@ -261,4 +270,4 @@ const Profile = () => {
 	);
 };
 
-export default Profile;
+export default React.memo(Profile);

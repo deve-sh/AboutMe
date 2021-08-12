@@ -95,9 +95,18 @@ const CodeBlockAction = styled(CardActions)`
 	margin-top: 0.75rem;
 `;
 
-const StatusImage = React.memo(styled(Image)`
+const TopDecorationBar = styled.div`
+	width: 100%;
+	height: 0.35rem;
+	background: ${(props) => props.background};
+	z-index: 100;
+	position: fixed;
+`;
+
+let StatusImage = styled(Image)`
 	margin-bottom: 1rem;
-`);
+`;
+StatusImage = React.memo(StatusImage);
 
 const Profile = () => {
 	const dispatch = useDispatch();
@@ -136,141 +145,144 @@ const Profile = () => {
 	}, [state.user?.status, state.user?.statusEmoji]);
 
 	return (
-		<ProfileContainer>
-			<Helmet>
-				<title>AboutMe - Profile</title>
-			</Helmet>
-			<ProfilePictureContainer>
-				<ProfilePicture
-					src={state.user?.photoURL || "/defaultprofilephoto.jpeg"}
-					alt="Profile Photo"
+		<>
+			<TopDecorationBar background={userStatusColor} />
+			<ProfileContainer>
+				<Helmet>
+					<title>AboutMe - Profile</title>
+				</Helmet>
+				<ProfilePictureContainer>
+					<ProfilePicture
+						src={state.user?.photoURL || "/defaultprofilephoto.jpeg"}
+						alt="Profile Photo"
+					/>
+				</ProfilePictureContainer>
+				<ProfileNameHeading variant="h5">
+					{state.user?.displayName || "Anonymous User"}
+				</ProfileNameHeading>
+				<StatusImage
+					src={`/api/getStatus.svg?identifier=${
+						state.user?.email || state.user?.phoneNumber
+					}`}
 				/>
-			</ProfilePictureContainer>
-			<ProfileNameHeading variant="h5">
-				{state.user?.displayName || "Anonymous User"}
-			</ProfileNameHeading>
-			<StatusImage
-				src={`/api/getStatus.svg?identifier=${
-					state.user?.email || state.user?.phoneNumber
-				}`}
-			/>
-			<Row>
-				<TextField
-					id="status-textfield"
-					label="Status"
-					variant="outlined"
-					placeholder="Ex: Out For Lunch"
-					onChange={(e) => {
-						e.persist();
-						if (e.target?.value?.length > 20) return;
-						setuserStatus(e.target.value);
-					}}
-					value={userStatus}
-					disabled={loading}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">
-								<AccountCircle />
-							</InputAdornment>
-						),
-					}}
-				/>
-				<Typography color="textSecondary" style={{ marginLeft: "1rem" }}>
-					{userStatus.length} / 20
-				</Typography>
-			</Row>
-			<Row className="splitonsmallscreen">
-				<CenterAlignContainer>
-					<Row>
-						<Typography
-							gutterBottom
-							color="textSecondary"
-							style={{ fontWeight: 600 }}
-						>
-							Selected Emoji:
-						</Typography>
-						{userStatusEmoji}
-					</Row>
-					<EmojiPicker
-						onEmojiClick={(_, emojiObject) => {
-							console.log(emojiObject);
-							setuserStatusEmoji(emojiObject.emoji);
+				<Row>
+					<TextField
+						id="status-textfield"
+						label="Status"
+						variant="outlined"
+						placeholder="Ex: Out For Lunch"
+						onChange={(e) => {
+							e.persist();
+							if (e.target?.value?.length > 20) return;
+							setuserStatus(e.target.value);
 						}}
-						disableAutoFocus={true}
-						groupNames={{ smileys_people: "PEOPLE" }}
-						native
+						value={userStatus}
+						disabled={loading}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<AccountCircle />
+								</InputAdornment>
+							),
+						}}
 					/>
-				</CenterAlignContainer>
-				<CenterAlignContainer>
-					<Typography color="textSecondary">Status Badge Colour</Typography>
-					<ChromePicker
-						color={userStatusColor}
-						onChangeComplete={(color) => setuserStatusColor(color.hex)}
-					/>
-				</CenterAlignContainer>
-			</Row>
-			<CodeBlock
-				style={{ background: "#212121", color: "#ffffff" }}
-				elevation={10}
-			>
-				{JSON.stringify(
-					{
-						identifier: state.user.email || state.user.phoneNumber,
-						isStatusPresent: !!userStatus || false,
-						status: userStatus || "No Status",
-						statusEmoji: userStatusEmoji || "😁",
-						statusColor: userStatusColor || "brightgreen",
-					},
-					null,
-					4
-				)}
-				<CodeBlockAction>
-					<Tooltip title="Get Link To Status">
-						<a
-							href={`/api/getStatus.json?identifier=${
-								state.user.email || state.user.phoneNumber
-							}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<IconButton
-								disableSpacing
-								size="small"
-								style={{ color: "#ffffff", padding: 0 }}
+					<Typography color="textSecondary" style={{ marginLeft: "1rem" }}>
+						{userStatus.length} / 20
+					</Typography>
+				</Row>
+				<Row className="splitonsmallscreen">
+					<CenterAlignContainer>
+						<Row>
+							<Typography
+								gutterBottom
+								color="textSecondary"
+								style={{ fontWeight: 600 }}
 							>
-								<Launch size="small" />
-							</IconButton>
-						</a>
-					</Tooltip>
-					<Tooltip title="Get Status Image">
-						<a
-							href={`/api/getStatus.svg?identifier=${
-								state.user.email || state.user.phoneNumber
-							}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<IconButton
-								disableSpacing
-								size="small"
-								style={{ color: "#ffffff", padding: 0 }}
+								Selected Emoji:
+							</Typography>
+							{userStatusEmoji}
+						</Row>
+						<EmojiPicker
+							onEmojiClick={(_, emojiObject) => {
+								console.log(emojiObject);
+								setuserStatusEmoji(emojiObject.emoji);
+							}}
+							disableAutoFocus={true}
+							groupNames={{ smileys_people: "PEOPLE" }}
+							native
+						/>
+					</CenterAlignContainer>
+					<CenterAlignContainer>
+						<Typography color="textSecondary">Status Badge Colour</Typography>
+						<ChromePicker
+							color={userStatusColor}
+							onChangeComplete={(color) => setuserStatusColor(color.hex)}
+						/>
+					</CenterAlignContainer>
+				</Row>
+				<CodeBlock
+					style={{ background: "#212121", color: "#ffffff" }}
+					elevation={10}
+				>
+					{JSON.stringify(
+						{
+							identifier: state.user.email || state.user.phoneNumber,
+							isStatusPresent: !!userStatus || false,
+							status: userStatus || "No Status",
+							statusEmoji: userStatusEmoji || "😁",
+							statusColor: userStatusColor || "brightgreen",
+						},
+						null,
+						4
+					)}
+					<CodeBlockAction>
+						<Tooltip title="Get Link To Status">
+							<a
+								href={`/api/getStatus.json?identifier=${
+									state.user.email || state.user.phoneNumber
+								}`}
+								target="_blank"
+								rel="noopener noreferrer"
 							>
-								<ImageIcon size="small" />
-							</IconButton>
-						</a>
-					</Tooltip>
-				</CodeBlockAction>
-			</CodeBlock>
-			<Button
-				onClick={updateProfileStatus}
-				variant={"contained"}
-				color="primary"
-				endIcon={<Send />}
-				disabled={loading}
-			>
-				Update
-			</Button>
-		</ProfileContainer>
+								<IconButton
+									disableSpacing
+									size="small"
+									style={{ color: "#ffffff", padding: 0 }}
+								>
+									<Launch size="small" />
+								</IconButton>
+							</a>
+						</Tooltip>
+						<Tooltip title="Get Status Image">
+							<a
+								href={`/api/getStatus.svg?identifier=${
+									state.user.email || state.user.phoneNumber
+								}`}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<IconButton
+									disableSpacing
+									size="small"
+									style={{ color: "#ffffff", padding: 0 }}
+								>
+									<ImageIcon size="small" />
+								</IconButton>
+							</a>
+						</Tooltip>
+					</CodeBlockAction>
+				</CodeBlock>
+				<Button
+					onClick={updateProfileStatus}
+					variant={"contained"}
+					color="primary"
+					endIcon={<Send />}
+					disabled={loading}
+				>
+					Update
+				</Button>
+			</ProfileContainer>
+		</>
 	);
 };
 

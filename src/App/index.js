@@ -7,14 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Global material ui configuration.
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import cyan from "@material-ui/core/colors/cyan";
+import red from "@material-ui/core/colors/red";
 import blue from "@material-ui/core/colors/blue";
 
 // Constants
 import constants from "./constants";
 import toasts from "./constants/toastConstants";
 
-import auth from "../firebase/authentication";
+import auth, { logoutUser } from "../firebase/authentication";
 
 // Reusable Components
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -34,7 +34,7 @@ import { createUserDocument, getUserDocument } from "./API";
 const theme = createTheme({
 	palette: {
 		primary: blue,
-		secondary: cyan,
+		secondary: red,
 	},
 });
 
@@ -93,7 +93,9 @@ const App = () => {
 
 			<Switch>
 				<Route path="/login" component={Login} />
-				<ProtectedRoute path="/profile" component={Profile} />
+				<ProtectedRoute path="/profile">
+					<Profile logoutUser={logoutUser} />
+				</ProtectedRoute>
 			</Switch>
 		</ThemeProvider>
 	);

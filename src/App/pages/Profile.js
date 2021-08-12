@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 import {
 	Button,
@@ -136,6 +137,9 @@ const Profile = () => {
 
 	return (
 		<ProfileContainer>
+			<Helmet>
+				<title>AboutMe - Profile</title>
+			</Helmet>
 			<ProfilePictureContainer>
 				<ProfilePicture
 					src={state.user?.photoURL || "/defaultprofilephoto.jpeg"}

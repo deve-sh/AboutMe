@@ -27,9 +27,8 @@ import Profile from "./pages/Profile";
 import {
 	loginUser,
 	logoutUser as logoutUserFromStore,
-	updateUserDetails,
 } from "./store/actionCreators";
-import { createUserDocument, getUserDocument } from "./API";
+import { createUserDocument, getUserDocument, updateUserDocument } from "./API";
 
 const theme = createTheme({
 	palette: {
@@ -74,10 +73,10 @@ const App = () => {
 				);
 				if (userDocumentInDatabase) {
 					// Update any details that might have updated.
-					await updateUserDetails(email || phoneNumber, userData);
+					await updateUserDocument(email || phoneNumber, userData, () => null);
 				} else {
 					// Create a user with this identifier.
-					await createUserDocument(email || phoneNumber, userData);
+					await createUserDocument(email || phoneNumber, userData, () => null);
 				}
 
 				dispatch(loginUser({ ...userData, ...(userDocumentInDatabase || {}) }));

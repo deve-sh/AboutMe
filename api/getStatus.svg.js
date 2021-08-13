@@ -24,10 +24,7 @@ module.exports = async (req, res) => {
 		};
 
 		let { identifier } = req.query;
-		if (!identifier)
-			return res.status(400).send({
-				error: "Incomplete information provided.",
-			});
+		if (!identifier) return res.status(400).send("");
 
 		let userInfo = await firebase
 			.firestore()
@@ -36,9 +33,7 @@ module.exports = async (req, res) => {
 			.get();
 
 		if (!userInfo.exists || userInfo.data().disabled)
-			return res.status(404).send({
-				error: "User not found.",
-			});
+			return res.status(404).send("");
 
 		userInfo = userInfo.data();
 
@@ -53,8 +48,6 @@ module.exports = async (req, res) => {
 		if (image) res.setHeader("Content-Type", "image/svg+xml");
 		return res.send(image);
 	} catch (err) {
-		return res.status(500).json({
-			message: err.message || "Something went wrong. Please try again later.",
-		});
+		return res.status(500).send("");
 	}
 };

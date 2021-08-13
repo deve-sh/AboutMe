@@ -17,7 +17,7 @@ const ProtectedRoute = ({ component: Component, children, ...rest }) => {
 						children
 					)
 				) : (
-					<Redirect to="/" />
+					<Redirect to="/login" />
 				)
 			}
 		/>

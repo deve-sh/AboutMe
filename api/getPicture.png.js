@@ -1,7 +1,6 @@
 module.exports = async (req, res) => {
 	try {
 		const firebase = require("../serverSideFirebase");
-		const { get } = require("axios");
 
 		let { identifier } = req.query;
 		if (!identifier) return res.status(400).send("");
@@ -17,12 +16,11 @@ module.exports = async (req, res) => {
 
 		userInfo = userInfo.data();
 
-		let image = "";
 		if (userInfo.photoURL)
 			return res.send(`<img src="${userInfo.photoURL}" />`);
 
 		res.setHeader("Content-Type", "image/png");
-		return res.send(image);
+		return res.send("");
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json("");

@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
 		res.setHeader("Content-Type", "image/png");
 		return res.send("");
 	} catch (err) {
-		console.log(err);
 		return res.status(500).json("");
 	}
 };

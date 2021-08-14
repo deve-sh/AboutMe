@@ -17,7 +17,7 @@ import {
 import toasts from "../constants/toastConstants";
 
 const LoginPageForm = styled(Paper)`
-	padding: 3rem 1rem 2rem 1rem;
+	padding: 0.75rem 1rem 1.75rem 1rem;
 	display: block;
 	margin: auto auto;
 	max-width: 350px;
@@ -36,9 +36,10 @@ const LoginPage = styled.div`
 	justify-content: center;
 `;
 
-const LoginFormHeading = styled(Typography)`
-	font-size: 1.25rem;
-	margin-bottom: 1.5rem !important;
+const LoginFormHeading = styled.h1`
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 1.5rem;
 `;
 
 const LoginFormImage = styled(Image)`

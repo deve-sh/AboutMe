@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 
@@ -17,7 +17,7 @@ import {
 import toasts from "../constants/toastConstants";
 
 const LoginPageForm = styled(Paper)`
-	padding: 3rem 1rem;
+	padding: 3rem 1rem 2rem 1rem;
 	display: block;
 	margin: auto auto;
 	max-width: 350px;
@@ -84,6 +84,11 @@ const Login = () => {
 				<br />
 				<br />
 				<GithubSignInButton disabled={loading} onClick={onGithubSignInClick} />
+				<br />
+				<br />
+				<Link to="/" title="Back Home">
+					Back Home
+				</Link>
 			</LoginPageForm>
 		</LoginPage>
 	);

@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Global material ui configuration.
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import red from "@material-ui/core/colors/red";
-import blue from "@material-ui/core/colors/blue";
 
 // Constants
 import constants from "./constants";
@@ -33,8 +31,12 @@ import { createUserDocument, getUserDocument, updateUserDocument } from "./API";
 
 const theme = createTheme({
 	palette: {
-		primary: blue,
-		secondary: red,
+		primary: {
+			main: '#005f56'
+		},
+		secondary: {
+			main: "#00897b"
+		},
 	},
 });
 

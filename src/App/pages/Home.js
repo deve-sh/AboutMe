@@ -1,10 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
-import { Typography, Button } from "@material-ui/core";
-import { MeetingRoom as LoginIcon } from "@material-ui/icons";
+import { Button } from "@material-ui/core";
+import {
+	MeetingRoom as LoginIcon,
+	AccountCircle as ProfileIcon,
+} from "@material-ui/icons";
 
 import Image from "../components/Image";
 
@@ -23,7 +27,6 @@ const HomePageFirstSection = styled.section`
 `;
 const HomePageImageSection = styled.div`
 	padding: 1rem;
-
 	img {
 		max-width: 350px;
 	}
@@ -42,16 +45,25 @@ const Description = styled.div`
 // Second section styling.
 const HomePageSecondSection = styled(HomePageFirstSection)``;
 
-const Home = (props) => {
+const Home = () => {
+	const user = useSelector((state) => state.user);
+
 	return (
 		<>
 			<Helmet>
 				<title>AboutMe</title>
 			</Helmet>
 			<HomePageHeader>
-				<Link to="/login" title="Login">
-					<Button color="primary" variant="contained" startIcon={<LoginIcon />}>
-						Login
+				<Link
+					to={user ? "/profile" : "/login"}
+					title={user ? "Profile" : "Login"}
+				>
+					<Button
+						color="primary"
+						variant="contained"
+						startIcon={user ? <ProfileIcon /> : <LoginIcon />}
+					>
+						{user ? "Profile" : "Login"}
 					</Button>
 				</Link>
 			</HomePageHeader>

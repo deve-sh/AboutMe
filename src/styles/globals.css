@@ -14,3 +14,8 @@ body {
 a {
 	text-decoration: none;
 }
+
+.resimage {
+	max-width: 100%;
+	max-height: 100%;
+}

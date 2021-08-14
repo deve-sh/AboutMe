@@ -20,6 +20,7 @@ import auth, { logoutUser } from "../firebase/authentication";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Pages
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 
@@ -91,6 +92,7 @@ const App = () => {
 			<ToastContainer />
 
 			<Switch>
+				<Route path="/" exact component={Home} />
 				<Route path="/login" component={Login} />
 				<ProtectedRoute path="/profile">
 					<Profile logoutUser={logoutUser} />

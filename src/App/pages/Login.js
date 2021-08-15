@@ -88,7 +88,7 @@ const Login = () => {
 				<br />
 				<br />
 				<Link to="/" title="Back Home">
-					Back Home
+					<Typography color="primary">Back Home</Typography>
 				</Link>
 			</LoginPageForm>
 		</LoginPage>

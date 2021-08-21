@@ -30,8 +30,9 @@ Example: ![Example Status](./public/samplestatus.svg)
 
 ```json
 {
+    "hasPhoto": true,
 	"picture": "https://lh3.googleusercontent.com/a-/AOh14GjxW6Y507PAjA7HFZAi151o5jO5mPPt7D_6sb7K3Dw=s96-c",
-	"message": "Success" or "User doesn't have a profile picture"
+	"message": "Success"
 }
 ```
 

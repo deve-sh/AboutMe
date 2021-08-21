@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
 		userInfo = userInfo.data();
 
 		return res.json({
+			hasPhoto: !!userInfo.photoURL,
 			picture: userInfo.photoURL || "",
 			message: userInfo.photoURL ? "Success" : "User doesn't have a photo",
 		});

@@ -23,3 +23,20 @@ The app has specific endpoints for each part of your profile. To update your pro
 - As Image: `https://statusupdate.vercel.app/api/getStatus.svg?identifer=<email>`
 
 Example: ![Example Status](./public/samplestatus.svg)
+
+### Get Profile Picture
+
+- As JSON Payload: `https://statusupdate.vercel.app/api/getPicture.json?identifer=<email>`
+
+```json
+{
+	"picture": "https://lh3.googleusercontent.com/a-/AOh14GjxW6Y507PAjA7HFZAi151o5jO5mPPt7D_6sb7K3Dw=s96-c",
+	"message": "Success" or "User doesn't have a profile picture"
+}
+```
+
+- As Image: `https://statusupdate.vercel.app/api/getPicture.png?identifer=<email>`
+
+### Issues
+
+For any issues you face with the service, simply raise an issue on the repository.
